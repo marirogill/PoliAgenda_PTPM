@@ -81,7 +81,6 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
     }
     
     @GET
-    //@Override
     @Path("listadoHijos/{idPadre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     List<Hijos> findByUsuario(@PathParam("idPadre") Integer idPadre) {

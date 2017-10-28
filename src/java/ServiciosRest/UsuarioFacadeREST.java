@@ -6,11 +6,14 @@
 package ServiciosRest;
 
 import PersistenceUsuario.Usuario;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,6 +34,8 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
 
     @PersistenceContext(unitName = "AgendaPediatricaNuevoPU")
     private EntityManager em;
+    
+    private JsonObject correoUsuario;
 
     public UsuarioFacadeREST() {
         super(Usuario.class);
@@ -41,6 +46,20 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Usuario entity) {
         super.create(entity);
+    }
+    
+    //Servicio POST donde verificamos si el correo del usuario logeado con google
+    //ya existe en nuestra base de datos.
+    @POST
+    @Path("validar")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Usuario> ValidarUsuario(JsonObject JObject) {
+        //super.create(JsonObject);
+        //String usuCorreo = entity.getCorreo();
+        List<Usuario> result = findByCorreo(JObject.getAsJsonObject().get("correo").getAsString());
+    
+        return result;
     }
 
     @PUT
@@ -88,6 +107,15 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     protected EntityManager getEntityManager() {
         //return em;
          return em = Persistence.createEntityManagerFactory("AgendaPediatricaNuevoPU").createEntityManager();
+    }
+
+    //Función donde buscamos al usuario por correo.
+    //dicho correo es el parámetro ingresado para localizarlo por el typedquery creado
+    //en la persistencia.
+    private List<Usuario> findByCorreo(String correo) {
+        TypedQuery<Usuario> consultaUsuario = em.createNamedQuery("Usuario.findByCorreo", Usuario.class);
+        consultaUsuario.setParameter("correo", correo);
+        return consultaUsuario.getResultList();
     }
     
 }
