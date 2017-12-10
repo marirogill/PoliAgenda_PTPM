@@ -48,17 +48,21 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         super.create(entity);
     }
     
-    //Servicio POST donde verificamos si el correo del usuario logeado con google
-    //ya existe en nuestra base de datos.
+    /*Servicio POST donde verificamos si el correo del usuario logeado con google
+    ya existe en nuestra base de datos.*/
     @POST
     @Path("validar")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public List<Usuario> ValidarUsuario(JsonObject JObject) {
         //super.create(JsonObject);
-        //String usuCorreo = entity.getCorreo();
-        List<Usuario> result = findByCorreo(JObject.getAsJsonObject().get("correo").getAsString());
-    
+        List<Usuario> result = null;
+
+        if((JObject.size()) > 0){
+            String usuCorreo = JObject.getAsJsonObject().get("correo").getAsString();
+            result = findByCorreo(usuCorreo);
+        }
+
         return result;
     }
 

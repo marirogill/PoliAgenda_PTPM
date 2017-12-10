@@ -64,14 +64,8 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
         return super.find(id);
     }
     
-    /*
-    @GET
-    @Path("{idPadre}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Hijos> findHijosPadre(@PathParam("idPadre") Integer id) {
-        return super.find(id);
-    }
-    */
+    
+   
     
     @GET
     @Override
@@ -81,7 +75,7 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
     }
     
     @GET
-    @Path("listadoHijos/{idPadre}")
+    @Path("listadohijos/{idPadre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     List<Hijos> findByUsuario(@PathParam("idPadre") Integer idPadre) {
         TypedQuery<Hijos> consultaHijos = em.createNamedQuery("Hijos.findByUsuario", Hijos.class);
