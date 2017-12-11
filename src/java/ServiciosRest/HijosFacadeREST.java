@@ -78,6 +78,9 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
     @Path("listadohijos/{idPadre}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     List<Hijos> findByUsuario(@PathParam("idPadre") Integer idPadre) {
+        
+        em = getEntityManager();
+                
         TypedQuery<Hijos> consultaHijos = em.createNamedQuery("Hijos.findByUsuario", Hijos.class);
         consultaHijos.setParameter("idUsuario", idPadre);
         return consultaHijos.getResultList();

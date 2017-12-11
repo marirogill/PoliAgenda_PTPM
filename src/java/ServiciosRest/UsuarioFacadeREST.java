@@ -111,7 +111,10 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @Path("usuario/{correo}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Usuario> findByCorreo(@PathParam("correo") String correo) {
-        TypedQuery<Usuario> consultaUsuario = em.createNamedQuery("UsuariUsuario.findByCorreoo.findByCorreo", Usuario.class);
+        
+        em = getEntityManager();
+        
+        TypedQuery<Usuario> consultaUsuario = em.createNamedQuery("Usuario.findByCorreo", Usuario.class);
         consultaUsuario.setParameter("correo", correo);
         return consultaUsuario.getResultList();
     }

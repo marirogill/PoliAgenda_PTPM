@@ -74,9 +74,12 @@ public class VacunasFacadeREST extends AbstractFacade<Vacunas> {
     //@Override
     @Path("listadoVacunas/{idHijo}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    List<Vacunas> findByHijo(@PathParam("idHijo") Integer idPadre) {
+    List<Vacunas> findByHijo(@PathParam("idHijo") Integer idHijo) {
+        
+        em = getEntityManager();
+                
         TypedQuery<Vacunas> consultaVacunas = em.createNamedQuery("Vacunas.findByHijo", Vacunas.class);
-        consultaVacunas.setParameter("idUsuario", idPadre);
+        consultaVacunas.setParameter("idUsuario", idHijo);
         return consultaVacunas.getResultList();
     }
     
