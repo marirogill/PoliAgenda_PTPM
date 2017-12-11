@@ -60,7 +60,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
 
         if((JObject.size()) > 0){
             String usuCorreo = JObject.getAsJsonObject().get("correo").getAsString();
-            result = findByCorreo(usuCorreo);
+            result = buscarCorreo(usuCorreo);
         }
 
         return result;
@@ -106,6 +106,15 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+    @GET
+    @Path("usuario/{correo}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Usuario> findByCorreo(@PathParam("correo") String correo) {
+        TypedQuery<Usuario> consultaUsuario = em.createNamedQuery("UsuariUsuario.findByCorreoo.findByCorreo", Usuario.class);
+        consultaUsuario.setParameter("correo", correo);
+        return consultaUsuario.getResultList();
+    }
 
     @Override
     protected EntityManager getEntityManager() {
@@ -116,7 +125,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     //Función donde buscamos al usuario por correo.
     //dicho correo es el parámetro ingresado para localizarlo por el typedquery creado
     //en la persistencia.
-    private List<Usuario> findByCorreo(String correo) {
+    private List<Usuario> buscarCorreo(String correo) {
         TypedQuery<Usuario> consultaUsuario = em.createNamedQuery("Usuario.findByCorreo", Usuario.class);
         consultaUsuario.setParameter("correo", correo);
         return consultaUsuario.getResultList();
