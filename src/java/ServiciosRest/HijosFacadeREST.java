@@ -39,14 +39,14 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void create(Hijos entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Hijos entity) {
         super.edit(entity);
     }
@@ -59,7 +59,7 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Hijos find(@PathParam("id") Integer id) {
         return super.find(id);
     }
@@ -69,14 +69,14 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
     
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Hijos> findAll() {
         return super.findAll();
     }
     
     @GET
     @Path("listadohijos/{idPadre}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     List<Hijos> findByUsuario(@PathParam("idPadre") Integer idPadre) {
         
         em = getEntityManager();
@@ -89,7 +89,7 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Hijos> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
