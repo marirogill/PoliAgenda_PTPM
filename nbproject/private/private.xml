@@ -5,7 +5,6 @@
         <group>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/ServiciosRest/UsuarioFacadeREST.java</file>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/ServiciosRest/HijosFacadeREST.java</file>
-            <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/ServiciosRest/AbstractFacade.java</file>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/ServiciosRest/VacunasFacadeREST.java</file>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/PersistenceUsuario/Usuario.java</file>
         </group>

@@ -110,6 +110,26 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
     @GET
     @Path("usuario/{correo}")
     @Produces({MediaType.APPLICATION_JSON})
+    public Usuario findByCorreo(@PathParam("correo") String correo) {
+        
+        em = getEntityManager();
+        
+        
+        
+        TypedQuery<Usuario> consultaUsuario = em.createNamedQuery("Usuario.findByCorreo", Usuario.class);
+        consultaUsuario.setParameter("correo", correo);
+        List<Usuario> usulist = consultaUsuario.getResultList();
+        
+        //return consultaUsuario.getResultList();
+        //RETORNAMOS el primer valor del arraylist, suponiendo que siempre traerá un solo valor.
+        return usulist.get(0);
+
+    }
+    
+    /*
+    @GET
+    @Path("usuario/{correo}")
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Usuario> findByCorreo(@PathParam("correo") String correo) {
         
         em = getEntityManager();
@@ -118,6 +138,7 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         consultaUsuario.setParameter("correo", correo);
         return consultaUsuario.getResultList();
     }
+    */
 
     @Override
     protected EntityManager getEntityManager() {
