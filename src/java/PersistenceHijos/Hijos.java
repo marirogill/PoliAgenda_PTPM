@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author pablo
  */
-
-//aca le agregué la consulta para traer los hijos de un usuario x
 @Entity
 @Table(name = "hijos")
 @XmlRootElement
@@ -43,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Hijos.findByNombreHijo", query = "SELECT h FROM Hijos h WHERE h.nombreHijo = :nombreHijo")
     , @NamedQuery(name = "Hijos.findByApellidoHijo", query = "SELECT h FROM Hijos h WHERE h.apellidoHijo = :apellidoHijo")
     , @NamedQuery(name = "Hijos.findByFechaNacimiento", query = "SELECT h FROM Hijos h WHERE h.fechaNacimiento = :fechaNacimiento")
+    , @NamedQuery(name = "Hijos.findBySexo", query = "SELECT h FROM Hijos h WHERE h.sexo = :sexo") 
     , @NamedQuery(name = "Hijos.findByUsuario", query = "SELECT h FROM Hijos h WHERE h.idUsuario = :idUsuario")})
 public class Hijos implements Serializable {
 
@@ -64,6 +63,8 @@ public class Hijos implements Serializable {
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
+    @Column(name = "sexo")
+    private Character sexo;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario idUsuario;
@@ -107,6 +108,14 @@ public class Hijos implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public Character getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Character sexo) {
+        this.sexo = sexo;
+    }
+
     public Usuario getIdUsuario() {
         return idUsuario;
     }
@@ -139,11 +148,11 @@ public class Hijos implements Serializable {
     public String toString() {
         return "PersistenceHijos.Hijos[ idHijo=" + idHijo + " ]";
     }
-
+    
     @XmlTransient
     public Collection<Vacunas> getVacunasCollection() {
         return vacunasCollection;
-    }
+}
 
     public void setVacunasCollection(Collection<Vacunas> vacunasCollection) {
         this.vacunasCollection = vacunasCollection;
