@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/ServiciosRest/UsuarioFacadeREST.java</file>
+            <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/PersistenceHijos/Hijos.java</file>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/ServiciosRest/HijosFacadeREST.java</file>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/ServiciosRest/VacunasFacadeREST.java</file>
             <file>file:/home/pablo/NetBeansProjects/AgendaPediatricaNuevo/src/java/PersistenceUsuario/Usuario.java</file>

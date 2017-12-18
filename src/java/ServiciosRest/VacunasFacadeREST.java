@@ -5,10 +5,12 @@
  */
 package ServiciosRest;
 
+import PersistenceHijos.Hijos;
 import PersistenceVacunas.Vacunas;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
@@ -72,14 +74,16 @@ public class VacunasFacadeREST extends AbstractFacade<Vacunas> {
 
     @GET
     //@Override
-    @Path("listadoVacunas/{idHijo}")
+    @Path("listadovacunas/{idHijo}")
     @Produces({MediaType.APPLICATION_JSON})
-    List<Vacunas> findByHijo(@PathParam("idHijo") Integer idHijo) {
+    public List<Vacunas> findByHijo(@PathParam("idHijo") Integer idHijo) {
         
         em = getEntityManager();
+        
+        Hijos hijo = getEntityManager().find(Hijos.class, idHijo);
                 
-        TypedQuery<Vacunas> consultaVacunas = em.createNamedQuery("Vacunas.findByHijo", Vacunas.class);
-        consultaVacunas.setParameter("idUsuario", idHijo);
+        TypedQuery<Vacunas> consultaVacunas = em.createNamedQuery("Vacunas.findByIdHijo", Vacunas.class);
+        consultaVacunas.setParameter("idHijo", hijo);
         return consultaVacunas.getResultList();
     }
     
@@ -99,7 +103,8 @@ public class VacunasFacadeREST extends AbstractFacade<Vacunas> {
 
     @Override
     protected EntityManager getEntityManager() {
-        return em;
+        //return em;
+         return em = Persistence.createEntityManagerFactory("AgendaPediatricaNuevoPU").createEntityManager();
     }
     
 }

@@ -9,6 +9,7 @@ import PersistenceHijos.Hijos;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")})
 public class Usuario implements Serializable {
 
-    @OneToMany(mappedBy = "idUsuario")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idUsuario")
     private Collection<Hijos> hijosCollection;
 
     private static final long serialVersionUID = 1L;

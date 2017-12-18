@@ -6,6 +6,7 @@
 package ServiciosRest;
 
 import PersistenceHijos.Hijos;
+import PersistenceUsuario.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -64,8 +65,7 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
         return super.find(id);
     }
     
-    
-   
+      
     
     @GET
     @Override
@@ -77,12 +77,15 @@ public class HijosFacadeREST extends AbstractFacade<Hijos> {
     @GET
     @Path("listadohijos/{idPadre}")
     @Produces({MediaType.APPLICATION_JSON})
-    List<Hijos> findByUsuario(@PathParam("idPadre") Integer idPadre) {
+    public List<Hijos> findByUsuario(@PathParam("idPadre") Integer idPadre) {
         
         em = getEntityManager();
+        
+        //traemos el usuario con el id ingresado
+        Usuario usu = getEntityManager().find(Usuario.class, idPadre);
                 
         TypedQuery<Hijos> consultaHijos = em.createNamedQuery("Hijos.findByUsuario", Hijos.class);
-        consultaHijos.setParameter("idUsuario", idPadre);
+        consultaHijos.setParameter("idUsuario", usu);
         return consultaHijos.getResultList();
     }
     

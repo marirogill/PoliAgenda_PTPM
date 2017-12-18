@@ -114,8 +114,6 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         
         em = getEntityManager();
         
-        
-        
         TypedQuery<Usuario> consultaUsuario = em.createNamedQuery("Usuario.findByCorreo", Usuario.class);
         consultaUsuario.setParameter("correo", correo);
         List<Usuario> usulist = consultaUsuario.getResultList();
